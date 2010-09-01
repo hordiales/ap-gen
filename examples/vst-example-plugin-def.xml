@@ -2,12 +2,13 @@
 <!DOCTYPE AudioPlugin SYSTEM "AudioPluginDef.dtd">
 <AudioPlugin Version="0.1">
 	<Metadata>
-		<Name>clamTestRtPlugin</Name>
-		<Description>This is a test realtime audio CLAM plugin</Description>
+		<Name>vstTestRtPlugin</Name>
+		<Description>This is a test realtime audio plugin</Description>
 		<Authors>Fulano, Sultano, Mengano</Authors>
 		<Copyright Year="2010">Club de Audio FIUBA</Copyright>
 		<License>GPL</License>
-		<Category>Plugins</Category>
+		<UID>APTestRtPlugin</UID>
+		<Category>kPlugCategEffect</Category>  <!-- Simple Effect -->
 	</Metadata>
 
 	<Inputs>
@@ -21,14 +22,14 @@
 		<Port Name="R Output">AudioOutPort</Port>
 	</Outputs>
 
-	<OutputPlugin Standard="CLAM" BuildSystem="Scons" OS="Linux">
+	<OutputPlugin Standard="VST" BuildSystem="Scons" OS="Linux">
 		<BaseTemplateName>Default</BaseTemplateName>
 
-		<CLAM_DefaultConfig> <!--  CLAM plugin specific configuration -->
-			<BaseClass>Processing</BaseClass>
-			<WithConfig>True</WithConfig>
-			<clam_prefix>~/dev/local/clam_dev</clam_prefix> <!-- optional -->
-		</CLAM_DefaultConfig>
+		<!--VST plugin specific configuration example -->
+			<!--TODO: add Vendor? or take Copyright value? -->
+		<VST_DefaultConfig> 
+			<vst_prefix>~/dev/local/vst_sdk</vst_prefix>
+		</VST_DefaultConfig>
 
 	</OutputPlugin>
 </AudioPlugin>

@@ -3,10 +3,11 @@
 <AudioPlugin Version="0.1">
 	<Metadata>
 		<Name>clamTestRtPlugin</Name>
-		<Description>This is a test realtime audio CLAM plugin</Description>
+		<Description>This is a test realtime audio plugin</Description>
 		<Authors>Fulano, Sultano, Mengano</Authors>
 		<Copyright Year="2010">Club de Audio FIUBA</Copyright>
 		<License>GPL</License>
+		<UID>1400</UID> <!-- LADSPA Unique ID -->
 		<Category>Plugins</Category>
 	</Metadata>
 
@@ -21,14 +22,11 @@
 		<Port Name="R Output">AudioOutPort</Port>
 	</Outputs>
 
-	<OutputPlugin Standard="CLAM" BuildSystem="Scons" OS="Linux">
+	<OutputPlugin Standard="LADSPA" BuildSystem="Scons" OS="Linux">
 		<BaseTemplateName>Default</BaseTemplateName>
 
-		<CLAM_DefaultConfig> <!--  CLAM plugin specific configuration -->
-			<BaseClass>Processing</BaseClass>
-			<WithConfig>True</WithConfig>
-			<clam_prefix>~/dev/local/clam_dev</clam_prefix> <!-- optional -->
-		</CLAM_DefaultConfig>
+		<LADSPA_DefaultConfig> <!--  LADSPA plugin specific configuration -->
+		</LADSPA_DefaultConfig>
 
 	</OutputPlugin>
 </AudioPlugin>
