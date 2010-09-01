@@ -1,0 +1,38 @@
+<!ELEMENT AudioPlugin (Metadata, Inputs, Outputs, OutputPlugin)>
+		<!ATTLIST AudioPlugin Version CDATA #REQUIRED>
+
+<!ELEMENT Metadata (Name, Description, Authors, Copyright, License, UID?, Category?)>
+	<!ELEMENT Name (#PCDATA)>
+	<!ELEMENT Description (#PCDATA)>
+	<!ELEMENT Authors (#PCDATA)>
+	<!ELEMENT Copyright (#PCDATA)>
+			<!ATTLIST Copyright Year CDATA #REQUIRED>
+	<!ELEMENT License (#PCDATA)>
+	<!ELEMENT UID (#PCDATA)> <!-- Unique ID needed for some standards -->
+	<!ELEMENT Category (#PCDATA)> <!-- necesaria para CLAM, default: Plugins -->
+
+<!ELEMENT Inputs  (Port*, Control*)>
+<!ELEMENT Outputs (Port*, Control*)>
+	<!ELEMENT Port (#PCDATA)>
+			<!ATTLIST Port Name CDATA #REQUIRED>
+	<!ELEMENT Control (#PCDATA)>
+			<!ATTLIST Control Name CDATA #REQUIRED>
+			<!ATTLIST Control Min CDATA #IMPLIED>
+			<!ATTLIST Control Max CDATA #IMPLIED>
+			<!ATTLIST Control DefaultValue CDATA #IMPLIED>
+
+<!ELEMENT OutputPlugin (BaseTemplateName, CLAM_DefaultConfig?, VST_DefaultConfig?)>
+		<!ATTLIST OutputPlugin Standard (CLAM|VST) #REQUIRED>
+		<!ATTLIST OutputPlugin BuildSystem (Scons|Makefile) #REQUIRED>
+		<!ATTLIST OutputPlugin OS (Linux|Windows|Mac|Crosscompile) #REQUIRED>
+	<!ELEMENT BaseTemplateName (#PCDATA)>
+
+	<!ELEMENT CLAM_DefaultConfig (BaseClass, WithConfig, clam_prefix?)>
+		<!ELEMENT BaseClass (#PCDATA)>
+		<!ELEMENT WithConfig (#PCDATA)>
+		<!ELEMENT clam_prefix (#PCDATA)>
+
+	<!ELEMENT VST_DefaultConfig (WithGUI?, vst_prefix?)>
+		<!ELEMENT WithGUI (#PCDATA)>
+		<!ELEMENT vst_prefix (#PCDATA)>
+
