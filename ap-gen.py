@@ -133,10 +133,12 @@ if __name__ == '__main__':
 	#FIXME: hacer OO (evitar ifs)
 #Ej:
 #	try:
-#		plugin = eval("genyrators."+plugDef.standard.lower()+".Plugin(plugDef)")
+#		plugin = eval("generators."+plugDef.standard.lower()+".Plugin(plugDef)")
 #	catch:
 	if plugDef.standard=='CLAM':
 		plugin = generators.clam.Plugin(plugDef)
+	elif plugDef.standard=='LADSPA':
+		plugin = generators.ladspa.Plugin(plugDef)
 	elif plugDef.standard=='VST':
 		plugin = generators.vst.Plugin(plugDef)
 

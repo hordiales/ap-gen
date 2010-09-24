@@ -20,27 +20,42 @@ class Plugin(PluginGen):
 
 		varsDict = {
 			'PluginName': pd.name,
-#			'PluginNameUpper': pd.name.upper(),
-#			'ProductString': pd.name,
-#			'VendorString': pd.copyright,
+			'ShortPluginName': pd.name.strip().replace(' ',''),
+			'Label': pd.name.strip().replace(' ','').lower(),
+			'FileName': pd.name+'.c',
 			'Description': pd.description,
+			'Version': '0.1', #TODO: take from xml?
 			'Authors': pd.authors,
+			'Contact': '', #pd.contact FIXME
 			'License': pd.license,
+			'LicenseAbastract': '', #FIXME (example GPL for .h and .cpp files)
 #			'Category': pd.category,
+			'Year': '', #pd.year, #FIXME
 			'UniqueID': pd.uid,
 
 			'InputsAmount': str(len(pd.inputPorts)),
 			'OutputsAmount': str(len(pd.outputPorts)),
 
+			'ControlInputsAmount': str(len(pd.inputControls)),
+			'ControlOutputsAmount': str(len(pd.outputControls)),
+			'ControlDefaultValue': "0.1", #TODO: define in the xml
 #FIXME
 #			'ControlsDeclaration': "",
 
-			'FilesList': "[ '"+pd.name+".h', '"+pd.name+".cpp' ]"
+			'FilesList': "[ '"+pd.name+".h', '"+pd.name+".c' ]",
+		}
+
+		#FIXME: for i in range(pd.inputPorts+pd.outputPorts+pd.inputControls+pd.outputControls)
+		varsDict['PortControlNumbers'] = """
+#define DIST_CONTROL 0
+#define COMP_CONTROL 1
+#define DIST_INPUT 2
+#define DIST_OUTPUT 3
+"""
 
 		pluginFiles = [
 		#   (InputTemplateFileName, OutputFile),
-			("BaseProcessing.h", pd.name+".h"),
-			("BaseProcessing.c", pd.name+".c"),
+			("base.c", pd.name+".c"),
 			("Makefile", "Makefile"),
 		]
 

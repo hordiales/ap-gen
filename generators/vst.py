@@ -35,8 +35,9 @@ class Plugin(PluginGen):
 
 			'ControlsDeclaration': "",
 
-			'FilesList': "[ '"+pd.name+".h', '"+pd.name+".cpp' ]"
+			'FilesList': "[ '"+pd.name+".h', '"+pd.name+".cpp' ]",
 		}
+
 
 		pluginFiles = [
 		#   (InputTemplateFileName, OutputFile),
