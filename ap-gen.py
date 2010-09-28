@@ -84,6 +84,7 @@ class APluginDef:
 			try: #optional attributes
 				tmpControl['Min'] = xmlcontrol.attributes["Min"].value.strip()
 				tmpControl['Max'] = xmlcontrol.attributes["Max"].value.strip()
+				tmpControl['DefaultValue'] = xmlcontrol.attributes["DefaultValue"].value.strip()
 			except:
 				pass
 			self.inputControls.append(tmpControl)

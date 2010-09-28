@@ -38,7 +38,7 @@ class Plugin(PluginGen):
 
 			'ControlInputsAmount': str(len(pd.inputControls)),
 			'ControlOutputsAmount': str(len(pd.outputControls)),
-			'ControlDefaultValue': "0.1", #TODO: define in the xml
+			'ControlDefaultValue': "0.1", #TODO: define in the xml, see ['ControlsDeclaration']
 #FIXME
 #			'ControlsDeclaration': "",
 
@@ -52,6 +52,20 @@ class Plugin(PluginGen):
 #define DIST_INPUT 2
 #define DIST_OUTPUT 3
 """
+
+		#FIXME
+		varsDict['PortsDeclaration'] = "\
+			LADSPA_Data * m_pfControl%s;\n\
+			LADSPA_Data * m_pfControlComp;\n"%'distortion' #distortion -> conrtol
+
+		#FIXME
+		#float (data) controls
+		varsDict['ControlsDeclaration'] = ""
+		varsDict['ControlsDefaultValues'] = ""
+		for dictItem in pd.inputControls:
+			if dictItem['Type']=='Data':
+				varsDict['ControlsDeclaration'] += "LADSPA_Data %s;\n"%dictItem['Name'].lower()
+			varsDict['ControlsDefaultValues'] = "*(ins->m_pfControl%s) = %s;"%(dictItem['Name'].lower(), dictItem['DefaultValue'])
 
 		pluginFiles = [
 		#   (InputTemplateFileName, OutputFile),
