@@ -19,7 +19,7 @@ def make_license_text(definitions_dict):
 		f = open( "licenses/" + definitions_dict["license"] + ".txt", 'r' )
 	except IOError:
 		print "License file read error."
-		print "License: " + plugin_dict["license"]
+		print "License: " + definitions_dict["license"]
 		sys.exit(2)
 	license_text = f.read(); f.close()
 	if definitions_dict["copyright_holder"]!="":
