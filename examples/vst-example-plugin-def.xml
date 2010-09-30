@@ -15,7 +15,7 @@
 		<Port Name="L Input">AudioInPort</Port>
 		<Port Name="R Input">AudioInPort</Port>
 
-		<Control Name="Gain" Min="0." Max="1.0" DefaultValue=".5">FloatInControl</Control>
+		<Control Name="Gain" Min="0." Max="1.0" DefaultValue=".5">Float</Control>
 	</Inputs>
 	<Outputs>
 		<Port Name="L Output">AudioOutPort</Port>

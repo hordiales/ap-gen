@@ -34,10 +34,21 @@ class Plugin(PluginGen):
 			'OutputsAmount': str(len(pd.outputPorts)),
 
 			'ControlsDeclaration': "",
+			'ControlsDefaultValues': "", #initial values
 
 			'FilesList': "[ '"+pd.name+".h', '"+pd.name+".cpp' ]",
 		}
 
+		for dictItem in self.pd.inputControls:
+			if dictItem['Type']=="Float":
+				varsDict['ControlsDeclaration'] += "    float f%s;\n"%dictItem['Name'].strip()
+				#optional attributes
+				try:
+					varsDict['ControlsDefaultValues'] += "    f%s = %sf;\n"%(dictItem['Name'].strip(), dictItem['DefaultValue'])
+				except:
+					pass
+		varsDict['ControlsDeclaration'] = varsDict['ControlsDeclaration'][4:] #removing first spaces
+		varsDict['ControlsDefaultValues'] = varsDict['ControlsDefaultValues'][4:] #removing first spaces
 
 		pluginFiles = [
 		#   (InputTemplateFileName, OutputFile),
