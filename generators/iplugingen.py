@@ -12,7 +12,7 @@ class IPluginGen:
 		raise Exception("This is an interface with no implementation")
 #interface IPluginGen
 
-class PluginGen:
+class PluginGen(IPluginGen):
 	""" Addon plugin generator abstract class """
 	name = ""
 	commonDependencies = []
