@@ -57,10 +57,10 @@ class APluginDef:
 			self.category = "Plugins" #default value
 
 		try: #optional element
-			self.category = metadata.getElementsByTagName("Category")[0].firstChild.data.strip()
+			self.library = metadata.getElementsByTagName("Library")[0].firstChild.data.strip()
 		except IndexError:
-			self.category = "" #default value
-
+			self.library = "" #default value
+	
 #		print self.name, self.description, self.authors, self.copyrightYear
 
 		outputPlugin = xmlDefFile.getElementsByTagName("OutputPlugin")[0]
@@ -68,12 +68,17 @@ class APluginDef:
 		self.buildSystem = outputPlugin.attributes["BuildSystem"].value.strip()
 		self.baseTemplateName = outputPlugin.getElementsByTagName("BaseTemplateName")[0].firstChild.data.strip()
 		
-#		//TODO: parsearch CLAM_DefaultConfig
+#		TODO: parsearch CLAM_DefaultConfig
 #		if self.standard=='CLAM':
 #			self.baseClass = outputPlugin.getElementsByTagName("CLAM_DefaultConfig")
 
 #		print self.standard, self.buildSystem, self.baseTemplateName
 
+		#TODO:
+		if self.standard=='VST':
+			vst_prefixElem = outputPlugin.getElementsByTagName("VST_DefaultConfig")[0]
+			self.vst_prefix = vst_prefixElem.getElementsByTagName("vst_prefix")[0].firstChild.data.strip()
+			
 		xmlInputs = xmlDefFile.getElementsByTagName("Inputs")[0]
 		self.inputPorts = list()
 		for xmlport in xmlInputs.getElementsByTagName("Port"):

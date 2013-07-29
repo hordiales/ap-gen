@@ -21,14 +21,18 @@ class Plugin(PluginGen):
 
 		varsDict = {
 			'PluginName': pd.name,
+			'PluginNameLower': pd.name.lower(),
 			'PluginNameUpper': pd.name.upper(),
 			'ProductString': pd.name,
 			'VendorString': pd.copyright,
 			'Description': pd.description,
 			'Authors': pd.authors,
 			'License': pd.license,
+			'Library': pd.library,
 			'Category': pd.category,
 			'UniqueID': pd.uid,
+
+			'VST_PREFIX': pd.vst_prefix,
 
 			'InputsAmount': str(len(pd.inputPorts)),
 			'OutputsAmount': str(len(pd.outputPorts)),
@@ -52,9 +56,10 @@ class Plugin(PluginGen):
 
 		pluginFiles = [
 		#   (InputTemplateFileName, OutputFile),
-			("BaseProcessing.h", pd.name+".h"),
-			("BaseProcessing.cpp", pd.name+".cpp"),
-			("SConstruct", "SConstruct"),
+			("pluginName.h", pd.name+".h"),
+			("pluginName.cpp", pd.name+".cpp"),
+			("Makefile", "Makefile"),
+			("pluginName.def", pd.name+".def"),
 		]
 
 		for templateName, outputFile in pluginFiles:
@@ -62,11 +67,12 @@ class Plugin(PluginGen):
 			pFile.fillVars( varsDict )
 			pFile.write( dir=pd.output_dir+"/"+pd.name, filename=outputFile )
 
-		copy_file_with_full_path( "options.cache", pd.templates_dir+"/vst/"+pd.baseTemplateName, pd.output_dir+"/"+pd.name )
+		#copy_file_with_full_path( "options.cache", pd.templates_dir+"/vst/"+pd.baseTemplateName, pd.output_dir+"/"+pd.name )
 	#make_sources()
 
 	def make_buildsystem(self):
-		print "WARNING: vst build system needs to be implemented"
+		#TODO: file is already built in make_sources() move it here
+		pass
 	#make_buildsystem()
 
 	def make_doc(self):
