@@ -2,7 +2,7 @@
 
 import os, glob, sys
 
-libraryName='{%%rocessingNameLowerCase%}'
+libraryName='{%ProcessingNameLowerCase%}'
 
 def scanFiles(pattern, paths) :
 	files = []
