@@ -8,7 +8,7 @@
 		<Copyright Year="2010">Club de Audio FIUBA</Copyright>
 		<License>GPL</License>
 		<Library>Test</Library>
-		<UID>APTestRtPlugin</UID>
+		<UID>1000</UID>
 		<Category>Effect</Category>  <!-- Simple Effect -->
 	</Metadata>
 

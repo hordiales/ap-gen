@@ -19,15 +19,19 @@ AudioEffect* createEffectInstance (audioMasterCallback audioMaster)
 
 //-------------------------------------------------------------------------------------------------------
 {%PluginName%}::{%PluginName%} (audioMasterCallback audioMaster)
-: AudioEffectX (audioMaster, 1, 1)	// 1 program, 1 parameter only
+: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, 1 parameter only
 {
-	setNumInputs (2);		// stereo in
-	setNumOutputs (2);		// stereo out
-	setUniqueID ('Gain');	// identify
+	setNumInputs ({%InputsAmount%}); // stereo in
+	setNumOutputs ({%OutputsAmount%}); // stereo out
+	
+	setUniqueID ('{%PluginName%}');	// identify
+	
 	canProcessReplacing ();	// supports replacing output
 	canDoubleReplacing ();	// supports double precision processing
 
+	//TODO update parameter values
 	fGain = 1.f;			// default to 0 dB
+	
 	vst_strncpy (programName, "Default", kVstMaxProgNameLen);	// default program name
 }
 
@@ -52,24 +56,28 @@ void {%PluginName%}::getProgramName (char* name)
 //-----------------------------------------------------------------------------------------
 void {%PluginName%}::setParameter (VstInt32 index, float value)
 {
+	//TODO update parameter values
 	fGain = value;
 }
 
 //-----------------------------------------------------------------------------------------
 float {%PluginName%}::getParameter (VstInt32 index)
 {
+	//TODO update parameter values
 	return fGain;
 }
 
 //-----------------------------------------------------------------------------------------
 void {%PluginName%}::getParameterName (VstInt32 index, char* label)
 {
+	//TODO update parameter values
 	vst_strncpy (label, "Gain", kVstMaxParamStrLen);
 }
 
 //-----------------------------------------------------------------------------------------
 void {%PluginName%}::getParameterDisplay (VstInt32 index, char* text)
 {
+	//TODO update parameter values
 	dB2string (fGain, text, kVstMaxParamStrLen);
 }
 
@@ -82,28 +90,29 @@ void {%PluginName%}::getParameterLabel (VstInt32 index, char* label)
 //------------------------------------------------------------------------
 bool {%PluginName%}::getEffectName (char* name)
 {
-	vst_strncpy (name, "Gain", kVstMaxEffectNameLen);
+	//TODO review if PluginName is the best option here
+	vst_strncpy (name, "{%PluginName%}", kVstMaxEffectNameLen);
 	return true;
 }
 
 //------------------------------------------------------------------------
 bool {%PluginName%}::getProductString (char* text)
 {
-	vst_strncpy (text, "Gain", kVstMaxProductStrLen);
+	vst_strncpy (text, "{%ProductString%}", kVstMaxProductStrLen);
 	return true;
 }
 
 //------------------------------------------------------------------------
 bool {%PluginName%}::getVendorString (char* text)
 {
-	vst_strncpy (text, "Steinberg Media Technologies", kVstMaxVendorStrLen);
+	vst_strncpy (text, "{%VendorString%}", kVstMaxVendorStrLen);
 	return true;
 }
 
 //-----------------------------------------------------------------------------------------
 VstInt32 {%PluginName%}::getVendorVersion ()
 { 
-	return 1000; 
+	return {%VendorVersion%}; 
 }
 
 //-----------------------------------------------------------------------------------------
@@ -114,6 +123,7 @@ void {%PluginName%}::processReplacing (float** inputs, float** outputs, VstInt32
     float* out1 = outputs[0];
     float* out2 = outputs[1];
 
+	//TODO update parameter values
     while (--sampleFrames >= 0)
     {
         (*out1++) = (*in1++) * fGain;
@@ -128,8 +138,9 @@ void {%PluginName%}::processDoubleReplacing (double** inputs, double** outputs, 
     double* in2  =  inputs[1];
     double* out1 = outputs[0];
     double* out2 = outputs[1];
-	double dGain = fGain;
 
+	//TODO update parameter values
+	double dGain = fGain;
     while (--sampleFrames >= 0)
     {
         (*out1++) = (*in1++) * dGain;

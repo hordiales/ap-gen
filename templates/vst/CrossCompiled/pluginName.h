@@ -42,7 +42,7 @@ public:
 	virtual VstInt32 getVendorVersion ();
 
 protected:
-	float fGain;
+	float fGain; //TODO update parameter values
 	char programName[kVstMaxProgNameLen + 1];
 };
 

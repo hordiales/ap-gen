@@ -25,18 +25,24 @@ class Plugin(PluginGen):
 			'PluginNameUpper': pd.name.upper(),
 			'ProductString': pd.name,
 			'VendorString': pd.copyright,
+			'VendorVersion': pd.uid,
+			'UniqueID': pd.uid,
 			'Description': pd.description,
 			'Authors': pd.authors,
 			'License': pd.license,
 			'Library': pd.library,
 			'Category': pd.category,
-			'UniqueID': pd.uid,
 
 			'VST_PREFIX': pd.vst_prefix,
-
+		
 			'InputsAmount': str(len(pd.inputPorts)),
 			'OutputsAmount': str(len(pd.outputPorts)),
 
+			'ParametersAmount': str(len(pd.inputControls)), # VST Parameters
+			#'ControlOutputsAmount': str(len(pd.outputControls)),
+			
+			#TODO: add parameters names, default values, min/max, etc
+			
 			'ControlsDeclaration': "",
 			'ControlsDefaultValues': "", #initial values
 
