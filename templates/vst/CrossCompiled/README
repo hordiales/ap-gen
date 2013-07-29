@@ -1,0 +1,11 @@
+== Description ==
+
+{%Description%}
+
+Authors: {%Authors%}
+
+== DLL generation ==
+
+$ make
+
+
