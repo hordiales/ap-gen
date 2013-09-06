@@ -20,6 +20,7 @@ class Plugin(PluginGen):
 
 		varsDict = {
 			'PluginName': pd.name,
+			'PluginPrefix': 'PLUGIN',
 			'ShortPluginName': pd.name.strip().replace(' ',''),
 			'Label': pd.name.strip().replace(' ','').lower(),
 			'FileName': pd.name+'.c',
@@ -45,13 +46,22 @@ class Plugin(PluginGen):
 			'FilesList': "[ '"+pd.name+".h', '"+pd.name+".c' ]",
 		}
 
-		#FIXME: for i in range(pd.inputPorts+pd.outputPorts+pd.inputControls+pd.outputControls)
-		varsDict['PortControlNumbers'] = """
-#define DIST_CONTROL 0
-#define COMP_CONTROL 1
-#define DIST_INPUT 2
-#define DIST_OUTPUT 3
-"""
+		portNumbers = 0
+		varsDict['PortControlNumbers'] = ""
+		for i in range(len(pd.inputControls)+len(pd.outputControls)):
+			varsDict['PortControlNumbers'] += "#define %s_CONTROL%i %i\n"%(varsDict['PluginPrefix'],i+1,portNumbers)
+			portNumbers += 1
+		
+		varsDict['PortInputNumbers'] = ""
+		for i in range(len(pd.inputPorts)):
+			varsDict['PortInputNumbers'] += "#define %s_INPUT%i %i\n"%(varsDict['PluginPrefix'],i+1,portNumbers)
+			portNumbers += 1
+			
+		varsDict['PortOutputNumbers'] = ""
+		for i in range(len(pd.outputPorts)):
+			varsDict['PortOutputNumbers'] += "#define %s_OUTPUT%i %i\n"%(varsDict['PluginPrefix'],i+1,portNumbers)
+			portNumbers += 1
+
 
 		#FIXME
 		varsDict['PortsDeclaration'] = "\
@@ -70,19 +80,22 @@ class Plugin(PluginGen):
 		pluginFiles = [
 		#   (InputTemplateFileName, OutputFile),
 			("base.c", pd.name+".c"),
-			("Makefile", "Makefile"),
+			("Makefile", "Makefile"), # TODO: Move makefile code to make_buildsystem()
 		]
 
 		for templateName, outputFile in pluginFiles:
 			pFile = PluginCode( template=pd.templates_dir+"/ladspa/"+pd.baseTemplateName+"/%s"%templateName )
 			pFile.fillVars( varsDict )
 			pFile.write( dir=pd.output_dir+"/"+pd.name, filename=outputFile )
-#TODO
-#		copy_file_with_full_path( "options.cache", pd.templates_dir+"/ladspa/"+pd.baseTemplateName, pd.output_dir+"/"+pd.name )
+
+		# LADSPA LGPL header 
+		copy_file_with_full_path( "ladspa.h", pd.templates_dir+"/ladspa/", pd.output_dir+"/"+pd.name )
+		
 	#make_sources()
 
 	def make_buildsystem(self):
-		print "WARNING: ladspa build system needs to be implemented"
+		# TODO: Move makefile code here
+		pass
 	#make_buildsystem()
 
 	def make_doc(self):

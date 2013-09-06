@@ -39,12 +39,17 @@ class APluginDef:
 		xmlDefFile = minidom.parse(xmlDefFile)
 
 		metadata = xmlDefFile.getElementsByTagName("Metadata")[0]
-		self.name = metadata.getElementsByTagName("Name")[0].firstChild.data.strip() #TODO: remove spaces?
+		self.name = metadata.getElementsByTagName("Name")[0].firstChild.data.strip().replace(' ','') # removes all spaces
 		self.description = metadata.getElementsByTagName("Description")[0].firstChild.data.strip()
 		self.authors = metadata.getElementsByTagName("Authors")[0].firstChild.data.strip()
 		self.copyright = metadata.getElementsByTagName("Copyright")[0].firstChild.data.strip()
 		self.copyrightYear = metadata.getElementsByTagName("Copyright")[0].attributes["Year"].value.strip()
-		self.license = metadata.getElementsByTagName("License")[0].firstChild.data.strip()
+
+		try:
+			self.license = metadata.getElementsByTagName("License")[0].firstChild.data.strip()
+		except:
+			self.license = '-' # Default value
+
 		try: #optional element
 			self.uid = metadata.getElementsByTagName("UID")[0].firstChild.data.strip() #TODO: remove spaces?
 			#WARNING: avoid cast to int, because then there is a text replacement, int( self.uid ) only for LADSPA, as example vst uses text based UniqueID

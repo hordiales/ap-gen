@@ -7,7 +7,7 @@
 		<Authors>Fulano, Sultano, Mengano</Authors>
 		<Copyright Year="2010">Club de Audio FIUBA</Copyright>
 		<License>GPL</License>
-		<UID>1400</UID> <!-- LADSPA Unique ID -->
+		<UID>1400</UID> <!-- FIXME LADSPA Unique ID -->
 
 		<!-- <Category>Plugins</Category> -->
 
