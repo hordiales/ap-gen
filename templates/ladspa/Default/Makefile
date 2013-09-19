@@ -36,7 +36,7 @@ $(PLUGIN_NAME).so:	$(PLUGIN_FILES) ladspa.h
 	$(CPP) -o $*.so $*.o -shared
 
 
-all:	$(PLUGINS)
+all:	$(PLUGIN_NAME).so
 
 
 clean:
