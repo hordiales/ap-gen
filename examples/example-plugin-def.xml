@@ -4,7 +4,7 @@
 	<Metadata>
 		<Name>vstTestRtPlugin</Name> <!-- Choose a name without spaces -->
 		<Description>This is a test plugin</Description>
-		<Authors>Fulano, Sultano, Mengano</Authors>
+		<Authors>Fulano, Sultano, Mengano</Authors> <!-- Choose a name without no ascii symbols -->
 		<Copyright Year="2010">Club de Audio FIUBA</Copyright>
 		<License>GPL</License>
 		<Library>Test</Library> <!-- Default value is '-' -->
@@ -16,7 +16,8 @@
 		<Port Name="L Input">AudioInPort</Port>
 		<Port Name="R Input">AudioInPort</Port>
 
-		<Control Name="Gain" Min="0." Max="1.0" DefaultValue=".5">Float</Control>
+		<!-- Default Label is null -->
+		<Control Name="Gain" Min="0." Max="1.0" DefaultValue=".5" Label="">Float</Control>
 	</Inputs>
 	<Outputs>
 		<Port Name="L Output">AudioOutPort</Port>

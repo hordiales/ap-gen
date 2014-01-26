@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
+# Copyright (c) 2010-2013 by Hernán Ordiales <audiocode@uint8.com.ar>
+
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
@@ -95,8 +97,13 @@ class APluginDef:
 				tmpControl['Min'] = xmlcontrol.attributes["Min"].value.strip()
 				tmpControl['Max'] = xmlcontrol.attributes["Max"].value.strip()
 				tmpControl['DefaultValue'] = xmlcontrol.attributes["DefaultValue"].value.strip()
+				tmpControl['Label'] = xmlcontrol.attributes["Label"].value.strip()
 			except:
-				pass
+				try:
+				  tmpControl['Label']
+				except:
+				  tmpControl['Label'] = "" #Default Value
+				#pass
 			self.inputControls.append(tmpControl)
 
 		xmlOutputs = xmlDefFile.getElementsByTagName("Outputs")[0]

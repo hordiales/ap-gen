@@ -49,16 +49,56 @@ class Plugin(PluginGen):
 			'FilesList': "[ '"+pd.name+".h', '"+pd.name+".cpp' ]",
 		}
 
+		#Input Controls
+		varsDict['InputControlsSetParam'] = "\tswitch (index)\n\t{\n"
+		varsDict['InputControlsGetParam'] = "\tswitch (index)\n\t{\n"
+		varsDict['InputControlsGetParamName'] = "\tswitch (index)\n\t{\n"
+		varsDict['InputControlsGetParamDisplay'] = "\tswitch (index)\n\t{\n"
+		varsDict['InputControlsGetParamLabel'] = "\tswitch (index)\n\t{\n"
+		varsDict['InputControlsEnum'] = "enum CONTROL_NAMES {\n"
 		for dictItem in self.pd.inputControls:
-			if dictItem['Type']=="Float":
-				varsDict['ControlsDeclaration'] += "    float f%s;\n"%dictItem['Name'].strip()
-				#optional attributes
-				try:
-					varsDict['ControlsDefaultValues'] += "    f%s = %sf;\n"%(dictItem['Name'].strip(), dictItem['DefaultValue'])
-				except:
-					pass
-		varsDict['ControlsDeclaration'] = varsDict['ControlsDeclaration'][4:] #removing first spaces
-		varsDict['ControlsDefaultValues'] = varsDict['ControlsDefaultValues'][4:] #removing first spaces
+			#FIXME: input value could not be float (implement for other types) (now if Float disabled)
+			#       all variables starts with 'f' of float...
+			#       use dictItem['Type'].lower() for general implementation
+			#if dictItem['Type']=="Float":
+			varsDict['ControlsDeclaration'] += "\t%s f%s;\n"%(dictItem['Type'].lower(),dictItem['Name'].strip())
+			#optional attributes
+			try:
+				varsDict['ControlsDefaultValues'] += "\tf%s = %sf;\n"%(dictItem['Name'].strip(), dictItem['DefaultValue'])
+			except:
+				pass
+
+			
+			varsDict['InputControlsSetParam'] += "\t\tcase k%s : f%s = value; break;\n"%(dictItem['Name'].strip(),dictItem['Name'].strip())
+			varsDict['InputControlsGetParam'] += "\t\tcase k%s : return f%s;\n"%(dictItem['Name'].strip(),dictItem['Name'].strip())
+			varsDict['InputControlsGetParamName'] += """\t\tcase k%s : vst_strncpy (label, "%s", kVstMaxParamStrLen); break;  \n"""%(dictItem['Name'].strip(),dictItem['Name'].strip())
+			#TODO: Could be dB2string or float2string
+			varsDict['InputControlsGetParamDisplay'] += """\t\tcase k%s : float2string (f%s, text, kVstMaxParamStrLen); break; \n"""%(dictItem['Name'].strip(),dictItem['Name'].strip())
+			varsDict['InputControlsGetParamLabel'] += """\t\tcase k%s : vst_strncpy (label, "%s", kVstMaxParamStrLen); break; \n"""%(dictItem['Name'].strip(),dictItem['Label'].strip())
+			
+			varsDict['InputControlsEnum'] += "\tk%s,\n"%dictItem['Name'].strip()
+
+		varsDict['InputControlsSetParam'] += "\t}"
+		if len(pd.inputControls)==1:
+		  varsDict['InputControlsSetParam'] = "\tf%s = value;"%dictItem['Name'].strip()
+		varsDict['InputControlsGetParam'] += "\t}"
+		if len(pd.inputControls)==1:
+		  varsDict['InputControlsGetParam'] = "\treturn f%s;"%dictItem['Name'].strip()
+		varsDict['InputControlsGetParamName'] += "\t}"
+		if len(pd.inputControls)==1:
+		  varsDict['InputControlsGetParamName'] = """\tvst_strncpy (label, "%s", kVstMaxParamStrLen);"""%dictItem['Name'].strip()
+		
+		varsDict['InputControlsGetParamDisplay'] += "\t}"
+		if len(pd.inputControls)==1:
+		  varsDict['InputControlsGetParamDisplay'] = """\tfloat2string (f%s, text, kVstMaxParamStrLen);"""%dictItem['Name'].strip()
+		varsDict['InputControlsGetParamDisplay'] = """\t//Could be dB2string or float2string\n"""+varsDict['InputControlsGetParamDisplay']
+		
+		varsDict['InputControlsGetParamLabel'] += "\t}"
+		if len(pd.inputControls)==1:
+		  varsDict['InputControlsGetParamLabel'] = """\tvst_strncpy (label, "%s", kVstMaxParamStrLen);"""%dictItem['Label'].strip()
+		
+		
+		varsDict['InputControlsEnum'] += "};"
 
 		pluginFiles = [
 		#   (InputTemplateFileName, OutputFile),

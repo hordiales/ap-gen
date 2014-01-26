@@ -29,9 +29,7 @@ AudioEffect* createEffectInstance (audioMasterCallback audioMaster)
 	canProcessReplacing ();	// supports replacing output
 	canDoubleReplacing ();	// supports double precision processing
 
-	//TODO update parameter values
-	fGain = 1.f;			// default to 0 dB
-	
+{%ControlsDefaultValues%}
 	vst_strncpy (programName, "Default", kVstMaxProgNameLen);	// default program name
 }
 
@@ -56,35 +54,31 @@ void {%PluginName%}::getProgramName (char* name)
 //-----------------------------------------------------------------------------------------
 void {%PluginName%}::setParameter (VstInt32 index, float value)
 {
-	//TODO update parameter values
-	fGain = value;
+{%InputControlsSetParam%}
 }
 
 //-----------------------------------------------------------------------------------------
 float {%PluginName%}::getParameter (VstInt32 index)
 {
-	//TODO update parameter values
-	return fGain;
+{%InputControlsGetParam%}
 }
 
 //-----------------------------------------------------------------------------------------
 void {%PluginName%}::getParameterName (VstInt32 index, char* label)
 {
-	//TODO update parameter values
-	vst_strncpy (label, "Gain", kVstMaxParamStrLen);
+{%InputControlsGetParamName%}
 }
 
 //-----------------------------------------------------------------------------------------
 void {%PluginName%}::getParameterDisplay (VstInt32 index, char* text)
 {
-	//TODO update parameter values
-	dB2string (fGain, text, kVstMaxParamStrLen);
+{%InputControlsGetParamDisplay%}
 }
 
 //-----------------------------------------------------------------------------------------
 void {%PluginName%}::getParameterLabel (VstInt32 index, char* label)
 {
-	vst_strncpy (label, "dB", kVstMaxParamStrLen);
+{%InputControlsGetParamLabel%}
 }
 
 //------------------------------------------------------------------------

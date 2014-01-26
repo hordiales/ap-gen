@@ -14,7 +14,8 @@
 
 #include "public.sdk/source/vst2.x/audioeffectx.h"
 
-//-------------------------------------------------------------------------------------------------------
+{%InputControlsEnum%}
+
 class {%PluginName%} : public AudioEffectX
 {
 public:
@@ -42,7 +43,7 @@ public:
 	virtual VstInt32 getVendorVersion ();
 
 protected:
-	float fGain; //TODO update parameter values
+{%ControlsDeclaration%}
 	char programName[kVstMaxProgNameLen + 1];
 };
 
