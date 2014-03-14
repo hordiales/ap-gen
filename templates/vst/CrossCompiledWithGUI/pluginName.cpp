@@ -19,7 +19,7 @@ AudioEffect* createEffectInstance (audioMasterCallback audioMaster)
 
 //-------------------------------------------------------------------------------------------------------
 {%PluginName%}::{%PluginName%} (audioMasterCallback audioMaster)
-: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, 1 parameter only
+: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, {%ParametersAmount%} parameter
 {
 	setNumInputs ({%InputsAmount%}); // stereo in
 	setNumOutputs ({%OutputsAmount%}); // stereo out
