@@ -11,9 +11,12 @@ VST_GUI_OBJ = $(VSTSDKDIR)/vstgui.sf/vstgui/aeffguieditor.o $(VSTSDKDIR)/vstgui.
 #$(VSTSDKDIR)/vstgui.sf/vstgui/plugguieditor.o
 #$(VSTSDKDIR)/vstgui.sf/vstgui/cfileselector.o
 
+RES_OBJ  = #resources/{%PluginName%}.rc
+
 VST_OBJ = $(VST_OBJ_COMMON) $(VST_GUI_OBJ)
 DLL_OBJ = 
-OBJ       = $(PLUGIN_NAME).o $(VST_OBJ) $(DLL_OBJ)
+OBJ       = $(PLUGIN_NAME).o $(VST_OBJ) $(DLL_OBJ) $(RES_OBJ).o
+
 LIBS      = -L. --add-stdcall-alias -lole32 -lkernel32 -lgdi32 -luuid -luser32 -mwindows --no-export-all-symbols --def $(PLUGIN_NAME).def
 
 CXXINCS   = -I"$(VSTSDKDIR)/pluginterfaces/vst2.x" -I"$(VSTSDKDIR)/public.sdk/source/vst2.x" -I"$(VSTSDKDIR)" -I"$(VSTSDKDIR)/vstgui.sf/vstgui" -I. 
@@ -42,7 +45,9 @@ $(BIN): $(OBJ)
 
 %.o: %.cpp
 	$(CPP) -c $< -o $@ $(CXXFLAGS)
-	
+
+#$(RES_OBJ).o: $(RES_OBJ)
+#	i586-mingw32msvc-windres $(RES_OBJ) $(RES_OBJ).o
 
 $(VSTSDKDIR)/public.sdk/source/vst2.x/vstplugmain.o: $(VSTSDKDIR)/public.sdk/source/vst2.x/vstplugmain.cpp
 	$(CPP) -c $(VSTSDKDIR)/public.sdk/source/vst2.x/vstplugmain.cpp -o $(VSTSDKDIR)/public.sdk/source/vst2.x/vstplugmain.o $(CXXFLAGS)
