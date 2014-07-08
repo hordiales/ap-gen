@@ -110,7 +110,22 @@ VstInt32 {%PluginName%}::getVendorVersion ()
 }
 
 //-----------------------------------------------------------------------------------------
-VstInt32 VstXSynth::processEvents (VstEvents* ev)
+void {%PluginName%}::noteOn (VstInt32 note, VstInt32 velocity, VstInt32 delta)
+{
+	currentNote = note;
+	currentVelocity = velocity;
+	currentDelta = delta;
+	noteIsOn = true;
+}
+
+//-----------------------------------------------------------------------------------------
+void {%PluginName%}::noteOff ()
+{
+	noteIsOn = false;
+}
+
+//-----------------------------------------------------------------------------------------
+VstInt32 {%PluginName%}::processEvents (VstEvents* ev)
 {
 	for (VstInt32 i = 0; i < ev->numEvents; i++)
 	{

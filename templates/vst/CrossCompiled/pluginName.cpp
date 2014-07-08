@@ -19,7 +19,7 @@ AudioEffect* createEffectInstance (audioMasterCallback audioMaster)
 
 //-------------------------------------------------------------------------------------------------------
 {%PluginName%}::{%PluginName%} (audioMasterCallback audioMaster)
-: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, 1 parameter only
+: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, {%ParametersAmount% parameter
 {
 	setNumInputs ({%InputsAmount%}); // stereo in
 	setNumOutputs ({%OutputsAmount%}); // stereo out
@@ -112,6 +112,7 @@ VstInt32 {%PluginName%}::getVendorVersion ()
 //-----------------------------------------------------------------------------------------
 void {%PluginName%}::processReplacing (float** inputs, float** outputs, VstInt32 sampleFrames)
 {
+    //FIXME: take into account mono or stereo case
     float* in1  =  inputs[0];
     float* in2  =  inputs[1];
     float* out1 = outputs[0];
@@ -128,6 +129,7 @@ void {%PluginName%}::processReplacing (float** inputs, float** outputs, VstInt32
 //-----------------------------------------------------------------------------------------
 void {%PluginName%}::processDoubleReplacing (double** inputs, double** outputs, VstInt32 sampleFrames)
 {
+    //FIXME: take into account mono or stereo case
     double* in1  =  inputs[0];
     double* in2  =  inputs[1];
     double* out1 = outputs[0];

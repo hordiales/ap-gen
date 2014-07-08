@@ -46,6 +46,16 @@ public:
 protected:
 {%ControlsDeclaration%}
 	char programName[kVstMaxProgNameLen + 1];
+	
+	VstInt32 channelPrograms[16];
+
+	VstInt32 currentNote;
+	VstInt32 currentVelocity;
+	VstInt32 currentDelta;
+	bool noteIsOn;
+	
+	void noteOn (VstInt32 note, VstInt32 velocity, VstInt32 delta);
+	void noteOff ();
 };
 
 #endif
