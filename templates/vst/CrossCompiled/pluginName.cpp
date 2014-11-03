@@ -18,22 +18,6 @@ AudioEffect* createEffectInstance (audioMasterCallback audioMaster)
 }
 
 //-------------------------------------------------------------------------------------------------------
-{%PluginName%}::{%PluginName%} (audioMasterCallback audioMaster)
-: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, {%ParametersAmount% parameter
-{
-	setNumInputs ({%InputsAmount%}); // stereo in
-	setNumOutputs ({%OutputsAmount%}); // stereo out
-	
-	setUniqueID ('{%PluginName%}');	// identify
-	
-	canProcessReplacing ();	// supports replacing output
-	canDoubleReplacing ();	// supports double precision processing
-
-{%ControlsDefaultValues%}
-	vst_strncpy (programName, "Default", kVstMaxProgNameLen);	// default program name
-}
-
-//-------------------------------------------------------------------------------------------------------
 {%PluginName%}::~{%PluginName%} ()
 {
 	// nothing to do here
@@ -109,6 +93,22 @@ VstInt32 {%PluginName%}::getVendorVersion ()
 	return {%VendorVersion%}; 
 }
 
+//-------------------------------------------------------------------------------------------------------
+{%PluginName%}::{%PluginName%} (audioMasterCallback audioMaster)
+: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, {%ParametersAmount% parameter
+{
+	setNumInputs ({%InputsAmount%}); // stereo in
+	setNumOutputs ({%OutputsAmount%}); // stereo out
+	
+	setUniqueID ('{%PluginName%}');	// identify
+	
+	canProcessReplacing ();	// supports replacing output
+	canDoubleReplacing ();	// supports double precision processing
+
+{%ControlsDefaultValues%}
+	vst_strncpy (programName, "Default", kVstMaxProgNameLen);	// default program name
+}
+
 //-----------------------------------------------------------------------------------------
 void {%PluginName%}::processReplacing (float** inputs, float** outputs, VstInt32 sampleFrames)
 {
@@ -119,10 +119,12 @@ void {%PluginName%}::processReplacing (float** inputs, float** outputs, VstInt32
     float* out2 = outputs[1];
 
 	//TODO update parameter values
+	
+	//passthrough
     while (--sampleFrames >= 0)
     {
-        (*out1++) = (*in1++) * fGain;
-        (*out2++) = (*in2++) * fGain;
+        (*out1++) = (*in1++);
+        (*out2++) = (*in2++);
     }
 }
 
@@ -136,10 +138,10 @@ void {%PluginName%}::processDoubleReplacing (double** inputs, double** outputs, 
     double* out2 = outputs[1];
 
 	//TODO update parameter values
-	double dGain = fGain;
-    while (--sampleFrames >= 0)
-    {
-        (*out1++) = (*in1++) * dGain;
-        (*out2++) = (*in2++) * dGain;
-    }
+// 	double dGain = fGain;
+//     while (--sampleFrames >= 0)
+//     {
+//         (*out1++) = (*in1++) * dGain;
+//         (*out2++) = (*in2++) * dGain;
+//     }
 }
