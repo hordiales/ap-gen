@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE AudioPlugin SYSTEM "AudioPluginDef.dtd">
+<AudioPlugin Version="0.1">
+	<Metadata>
+		<Name>vst_test_rt_plugin</Name>
+		<Description>This is a test plugin</Description>
+		<Authors>Fulano, Sultano, Mengano</Authors>
+		<Copyright Year="2010">Fulano</Copyright>
+		<License>GPL</License>
+		<Library>Test</Library>
+		<UID>1000</UID>
+		<Category>Effect</Category>  <!-- Simple Effect -->
+	</Metadata>
+
+	<Inputs>
+		<Port Name="input_L">AudioInPort</Port>
+		<Port Name="input_R">AudioInPort</Port>
+
+		<Control Name="gain" Min="0." Max="1.0" DefaultValue=".5">Float</Control>
+	</Inputs>
+	<Outputs>
+		<Port Name="output_L">AudioOutPort</Port>
+		<Port Name="output_R">AudioOutPort</Port>
+	</Outputs>
+
+	<OutputPlugin Standard="VST" BuildSystem="Makefile" OS="Linux">
+		<BaseTemplateName>cross_compiled_c_style</BaseTemplateName>
+
+		<!--VST plugin specific configuration example -->
+			<!--TODO: add Vendor? or take Copyright value? -->
+		<VST_DefaultConfig> 
+			<vst_prefix>$(HOME)/dev/audio/vst/vstsdk2.4</vst_prefix>
+		</VST_DefaultConfig>
+
+	</OutputPlugin>
+</AudioPlugin>
