@@ -39,11 +39,12 @@ public:
 	// Parameters
 	virtual void setParameter (VstInt32 index, float value) { set_parameter(index,value); }
 	virtual float getParameter (VstInt32 index) { return get_parameter(index); }
-	virtual void getParameterLabel (VstInt32 index, char* label);
-	virtual void getParameterDisplay (VstInt32 index, char* text);
-	virtual void getParameterName (VstInt32 index, char* text);
+	virtual void getParameterLabel (VstInt32 index, char* label) { get_parameter_label(index,label); }
+	virtual void getParameterDisplay (VstInt32 index, char* text) { get_parameter_display(index,text); }
+	virtual void getParameterName (VstInt32 index, char* text) { get_parameter_name(index,text); }
 
-	virtual bool getEffectName (char* name);
+	virtual bool getEffectName (char* name) { get_effect_name(name); }
+	
 	virtual bool getVendorString (char* text);
 	virtual bool getProductString (char* text);
 	virtual VstInt32 getVendorVersion ();
@@ -59,14 +60,11 @@ protected:
 	// Parameters
 	void set_parameter (VstInt32 index, float value);
 	float get_parameter (VstInt32 index);
-// 	void getParameterLabel (VstInt32 index, char* label);
-// 	void getParameterDisplay (VstInt32 index, char* text);
-// 	void getParameterName (VstInt32 index, char* text);
-// 
-// 	bool getEffectName (char* name);
-// 	bool getVendorString (char* text);
-// 	bool getProductString (char* text);
-// 	VstInt32 getVendorVersion ();
+	void get_parameter_label (VstInt32 index, char* label);
+	void get_parameter_display (VstInt32 index, char* text);
+	void get_parameter_name (VstInt32 index, char* text);
+
+	bool get_effect_name (char* name);
 protected:
 {%ControlsDeclaration%}
 	char programName[kVstMaxProgNameLen + 1];

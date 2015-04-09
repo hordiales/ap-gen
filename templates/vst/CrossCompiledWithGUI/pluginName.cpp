@@ -18,22 +18,6 @@ AudioEffect* createEffectInstance (audioMasterCallback audioMaster)
 }
 
 //-------------------------------------------------------------------------------------------------------
-{%PluginName%}::{%PluginName%} (audioMasterCallback audioMaster)
-: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, {%ParametersAmount%} parameter
-{
-	setNumInputs ({%InputsAmount%}); // stereo in
-	setNumOutputs ({%OutputsAmount%}); // stereo out
-	
-	setUniqueID ('{%PluginName%}');	// identify
-	
-	canProcessReplacing ();	// supports replacing output
-	canDoubleReplacing ();	// supports double precision processing
-
-{%ControlsDefaultValues%}
-	vst_strncpy (programName, "Default", kVstMaxProgNameLen);	// default program name
-}
-
-//-------------------------------------------------------------------------------------------------------
 {%PluginName%}::~{%PluginName%} ()
 {
 	// nothing to do here
@@ -107,6 +91,22 @@ bool {%PluginName%}::getVendorString (char* text)
 VstInt32 {%PluginName%}::getVendorVersion ()
 { 
 	return {%VendorVersion%}; 
+}
+
+//-------------------------------------------------------------------------------------------------------
+{%PluginName%}::{%PluginName%} (audioMasterCallback audioMaster)
+: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, {%ParametersAmount%} parameter
+{
+	setNumInputs ({%InputsAmount%}); // stereo in
+	setNumOutputs ({%OutputsAmount%}); // stereo out
+	
+	setUniqueID ('{%PluginName%}');	// identify
+	
+	canProcessReplacing ();	// supports replacing output
+	canDoubleReplacing ();	// supports double precision processing
+
+{%ControlsDefaultValues%}
+	vst_strncpy (programName, "Default", kVstMaxProgNameLen);	// default program name
 }
 
 //-----------------------------------------------------------------------------------------

@@ -48,25 +48,25 @@ float {%PluginName%}::get_parameter (VstInt32 index)
 }
 
 //-----------------------------------------------------------------------------------------
-void {%PluginName%}::getParameterName (VstInt32 index, char* label)
+void {%PluginName%}::get_parameter_name (VstInt32 index, char* label)
 {
 {%InputControlsGetParamName%}
 }
 
 //-----------------------------------------------------------------------------------------
-void {%PluginName%}::getParameterDisplay (VstInt32 index, char* text)
+void {%PluginName%}::get_parameter_display (VstInt32 index, char* text)
 {
 {%InputControlsGetParamDisplay%}
 }
 
 //-----------------------------------------------------------------------------------------
-void {%PluginName%}::getParameterLabel (VstInt32 index, char* label)
+void {%PluginName%}::get_parameter_label (VstInt32 index, char* label)
 {
 {%InputControlsGetParamLabel%}
 }
 
 //------------------------------------------------------------------------
-bool {%PluginName%}::getEffectName (char* name)
+bool {%PluginName%}::get_effect_name (char* name)
 {
 	//TODO review if PluginName is the best option here
 	vst_strncpy (name, "{%PluginName%}", kVstMaxEffectNameLen);
@@ -95,7 +95,7 @@ VstInt32 {%PluginName%}::getVendorVersion ()
 
 //-------------------------------------------------------------------------------------------------------
 {%PluginName%}::{%PluginName%} (audioMasterCallback audioMaster)
-: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, {%ParametersAmount% parameter
+: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, {%ParametersAmount%} parameter
 {
 	setNumInputs ({%InputsAmount%}); // stereo in
 	setNumOutputs ({%OutputsAmount%}); // stereo out

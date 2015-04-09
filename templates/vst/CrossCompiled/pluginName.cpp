@@ -95,7 +95,7 @@ VstInt32 {%PluginName%}::getVendorVersion ()
 
 //-------------------------------------------------------------------------------------------------------
 {%PluginName%}::{%PluginName%} (audioMasterCallback audioMaster)
-: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, {%ParametersAmount% parameter
+: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, {%ParametersAmount%} parameter
 {
 	setNumInputs ({%InputsAmount%}); // stereo in
 	setNumOutputs ({%OutputsAmount%}); // stereo out
