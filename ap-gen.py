@@ -162,5 +162,7 @@ if __name__ == '__main__':
 
 	plugin.make_all()
 #	plugin.make_sources()
+
+	print( "\nSee %s/%s for output"%(plugDef.output_dir,plugDef.name) )
 #__main__
 
