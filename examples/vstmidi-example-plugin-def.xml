@@ -9,7 +9,7 @@
 		<License>GPL</License>
 		<Library>Test</Library>
 		<UID>1000</UID>
-		<Category>Effect</Category>  <!-- Simple Effect -->
+		<Category>Effect</Category>
 	</Metadata>
 
 	<Inputs>
@@ -27,10 +27,8 @@
 		<BaseTemplateName>CrossCompiledMIDI</BaseTemplateName>
 
 		<!--VST plugin specific configuration example -->
-			<!--TODO: add Vendor? or take Copyright value? -->
 		<VST_DefaultConfig> 
 			<vst_prefix>$(HOME)/dev/audio/vst/vstsdk2.4</vst_prefix>
 		</VST_DefaultConfig>
-
 	</OutputPlugin>
 </AudioPlugin>
