@@ -1,8 +1,10 @@
-== Intro ==
+Intro
+=====
 
 Audio plugins skeleton maker.
 
-== Description ==
+Description
+===========
 
 AP-Gen speeds up and eases the plugin development through base source code
 generation, both for different standards and operating systems, thus achieving
@@ -23,20 +25,24 @@ compilation issues.
 
 Support to new standards can be added in a modular form.
 
-== INSTALL ==
+INSTALL
+=======
 
 Dependencies:
   * Python > 2.5
 
-== THANKS ==
+THANKS
+======
 
 CLAM project and Club de Audio FIUBA.
 
-== LICENSE ==
+LICENSE
+=======
 
 GPL
 
-== LINKS ==
+LINKS
+=====
 
  * AP-Gen: http://hordiales.github.io/ap-gen
  * CLAM (C++ Audio Framework): http://clam-project.org/ 
