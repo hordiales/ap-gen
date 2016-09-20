@@ -24,49 +24,49 @@ AudioEffect* createEffectInstance (audioMasterCallback audioMaster)
 }
 
 //-------------------------------------------------------------------------------------------------------
-void {%PluginName%}::setProgramName (char* name)
+void {%PluginName%}::set_program_name (char* name)
 {
 	vst_strncpy (programName, name, kVstMaxProgNameLen);
 }
 
 //-----------------------------------------------------------------------------------------
-void {%PluginName%}::getProgramName (char* name)
+void {%PluginName%}::get_program_name (char* name)
 {
 	vst_strncpy (name, programName, kVstMaxProgNameLen);
 }
 
 //-----------------------------------------------------------------------------------------
-void {%PluginName%}::setParameter (VstInt32 index, float value)
+void {%PluginName%}::set_parameter (VstInt32 index, float value)
 {
 {%InputControlsSetParam%}
 }
 
 //-----------------------------------------------------------------------------------------
-float {%PluginName%}::getParameter (VstInt32 index)
+float {%PluginName%}::get_parameter (VstInt32 index)
 {
 {%InputControlsGetParam%}
 }
 
 //-----------------------------------------------------------------------------------------
-void {%PluginName%}::getParameterName (VstInt32 index, char* label)
+void {%PluginName%}::get_parameter_name (VstInt32 index, char* label)
 {
 {%InputControlsGetParamName%}
 }
 
 //-----------------------------------------------------------------------------------------
-void {%PluginName%}::getParameterDisplay (VstInt32 index, char* text)
+void {%PluginName%}::get_parameter_display (VstInt32 index, char* text)
 {
 {%InputControlsGetParamDisplay%}
 }
 
 //-----------------------------------------------------------------------------------------
-void {%PluginName%}::getParameterLabel (VstInt32 index, char* label)
+void {%PluginName%}::get_parameter_label (VstInt32 index, char* label)
 {
 {%InputControlsGetParamLabel%}
 }
 
 //------------------------------------------------------------------------
-bool {%PluginName%}::getEffectName (char* name)
+bool {%PluginName%}::get_effect_name (char* name)
 {
 	//TODO review if PluginName is the best option here
 	vst_strncpy (name, "{%PluginName%}", kVstMaxEffectNameLen);
@@ -110,7 +110,7 @@ VstInt32 {%PluginName%}::getVendorVersion ()
 }
 
 //-----------------------------------------------------------------------------------------
-void {%PluginName%}::processReplacing (float** inputs, float** outputs, VstInt32 sampleFrames)
+void {%PluginName%}::process_replacing (float** inputs, float** outputs, VstInt32 sampleFrames)
 {
     //FIXME: take into account mono or stereo case
     float* in1  =  inputs[0];
@@ -129,7 +129,7 @@ void {%PluginName%}::processReplacing (float** inputs, float** outputs, VstInt32
 }
 
 //-----------------------------------------------------------------------------------------
-void {%PluginName%}::processDoubleReplacing (double** inputs, double** outputs, VstInt32 sampleFrames)
+void {%PluginName%}::process_double_replacing (double** inputs, double** outputs, VstInt32 sampleFrames)
 {
     //FIXME: take into account mono or stereo case
     double* in1  =  inputs[0];

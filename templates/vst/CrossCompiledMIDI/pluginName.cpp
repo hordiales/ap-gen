@@ -18,30 +18,6 @@ AudioEffect* createEffectInstance (audioMasterCallback audioMaster)
 }
 
 //-------------------------------------------------------------------------------------------------------
-{%PluginName%}::{%PluginName%} (audioMasterCallback audioMaster)
-: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, 1 parameter only
-{
-	setNumInputs ({%InputsAmount%}); // stereo in
-	setNumOutputs ({%OutputsAmount%}); // stereo out
-	
-	setUniqueID ('{%PluginName%}');	// identify
-	
-	canProcessReplacing ();	// supports replacing output
-	canDoubleReplacing ();	// supports double precision processing
-
-	isSynth(); //MIDI
-
-{%ControlsDefaultValues%}
-	vst_strncpy (programName, "Default", kVstMaxProgNameLen);	// default program name
-}
-
-//-------------------------------------------------------------------------------------------------------
-{%PluginName%}::~{%PluginName%} ()
-{
-	// nothing to do here
-}
-
-//-------------------------------------------------------------------------------------------------------
 void {%PluginName%}::setProgramName (char* name)
 {
 	vst_strncpy (programName, name, kVstMaxProgNameLen);
@@ -124,6 +100,30 @@ void {%PluginName%}::noteOn (VstInt32 note, VstInt32 velocity, VstInt32 delta)
 void {%PluginName%}::noteOff ()
 {
 	noteIsOn = false;
+}
+
+//-------------------------------------------------------------------------------------------------------
+
+{%PluginName%}::{%PluginName%} (audioMasterCallback audioMaster)
+: AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, 1 parameter only
+{
+    setNumInputs ({%InputsAmount%}); // stereo in
+    setNumOutputs ({%OutputsAmount%}); // stereo out
+    
+    setUniqueID ('{%PluginName%}'); // identify
+    
+    canProcessReplacing (); // supports replacing output
+    canDoubleReplacing ();  // supports double precision processing
+
+    isSynth(); //MIDI
+
+{%ControlsDefaultValues%}
+    vst_strncpy (programName, "Default", kVstMaxProgNameLen);   // default program name
+}
+
+{%PluginName%}::~{%PluginName%} ()
+{
+    // nothing to do here
 }
 
 //-----------------------------------------------------------------------------------------
