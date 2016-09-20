@@ -29,6 +29,8 @@ AudioEffect* createEffectInstance (audioMasterCallback audioMaster)
 	canProcessReplacing ();	// supports replacing output
 	canDoubleReplacing ();	// supports double precision processing
 
+	isSynth(); //MIDI
+
 {%ControlsDefaultValues%}
 	vst_strncpy (programName, "Default", kVstMaxProgNameLen);	// default program name
 }
