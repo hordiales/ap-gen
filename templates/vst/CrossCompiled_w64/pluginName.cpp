@@ -97,13 +97,13 @@ VstInt32 {%PluginName%}::getVendorVersion ()
 {%PluginName%}::{%PluginName%} (audioMasterCallback audioMaster)
 : AudioEffectX (audioMaster, 1, {%ParametersAmount%}) // 1 program, {%ParametersAmount%} parameter
 {
-	setNumInputs ({%InputsAmount%}); // stereo in
-	setNumOutputs ({%OutputsAmount%}); // stereo out
+	setNumInputs ({%InputsAmount%}); // (mono/stereo) in
+	setNumOutputs ({%OutputsAmount%}); // (mono/stereo) out
 	
 	setUniqueID ('{%PluginName%}');	// identify
 	
 	canProcessReplacing ();	// supports replacing output
-	canDoubleReplacing ();	// supports double precision processing
+	// canDoubleReplacing ();	// supports double precision processing
 
 {%ControlsDefaultValues%}
 	vst_strncpy (programName, "Default", kVstMaxProgNameLen);	// default program name
@@ -129,19 +129,19 @@ void {%PluginName%}::processReplacing (float** inputs, float** outputs, VstInt32
 }
 
 //-----------------------------------------------------------------------------------------
-void {%PluginName%}::processDoubleReplacing (double** inputs, double** outputs, VstInt32 sampleFrames)
-{
-    //FIXME: take into account mono or stereo case
-    double* in1  =  inputs[0];
-    double* in2  =  inputs[1];
-    double* out1 = outputs[0];
-    double* out2 = outputs[1];
+// void {%PluginName%}::processDoubleReplacing (double** inputs, double** outputs, VstInt32 sampleFrames)
+// {
+//     //FIXME: take into account mono or stereo case
+//     double* in1  =  inputs[0];
+//     double* in2  =  inputs[1];
+//     double* out1 = outputs[0];
+//     double* out2 = outputs[1];
 
-	//TODO update parameter values
-// 	double dGain = fGain;
-//     while (--sampleFrames >= 0)
-//     {
-//         (*out1++) = (*in1++) * dGain;
-//         (*out2++) = (*in2++) * dGain;
-//     }
-}
+// 	//TODO update parameter values
+// // 	double dGain = fGain;
+// //     while (--sampleFrames >= 0)
+// //     {
+// //         (*out1++) = (*in1++) * dGain;
+// //         (*out2++) = (*in2++) * dGain;
+// //     }
+// }
