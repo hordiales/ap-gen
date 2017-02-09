@@ -2,7 +2,7 @@ title: AP-Gen
 description: Framework for audio plugins skeletons generation from abstractions and templates
 google_analytics: 
 show_downloads: true
-theme: jekyll-theme-slate
+theme: jekyll-theme-minimal
 
 gems:
   - jekyll-mentions
