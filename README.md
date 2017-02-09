@@ -29,8 +29,9 @@ INSTALL
 =======
 
 Dependencies:
-  * Python > 2.5
-
+  
+  * 2.5 < Python < 3.0
+  
 THANKS
 ======
 
