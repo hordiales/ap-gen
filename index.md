@@ -29,7 +29,7 @@ INSTALL
 =======
 
 Dependencies:
-  * Python > 2.5
+ * Python > 2.5
 
 THANKS
 ======
