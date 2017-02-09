@@ -34,7 +34,7 @@ programado inicialmente para CLAM
 
 == Dependencias ==
 
-  * Python > 2.5
+  * 2.5 < Python < 3.0
 
 == Agradecimientos ==
 
