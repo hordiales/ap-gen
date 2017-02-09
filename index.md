@@ -3,6 +3,8 @@ Intro
 
 Audio plugins skeleton maker.
 
+(Ver [LEER](LEER.md) para versión en español)
+
 Description
 ===========
 
