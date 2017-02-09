@@ -44,6 +44,6 @@ GPL
 LINKS
 =====
 
- * AP-Gen: http://hordiales.github.io/ap-gen
- * CLAM (C++ Audio Framework): http://clam-project.org/ 
- * Club de Audio de la FIUBA: http://groups.google.com/group/club_de_audio_fiuba/
+ * AP-Gen: [http://hordiales.github.io/ap-gen](http://hordiales.github.io/ap-gen)
+ * CLAM (C++ Audio Framework): [http://clam-project.org/](http://clam-project.org/)
+ * Club de Audio de la FIUBA: [http://groups.google.com/group/club_de_audio_fiuba/](http://groups.google.com/group/club_de_audio_fiuba/)
